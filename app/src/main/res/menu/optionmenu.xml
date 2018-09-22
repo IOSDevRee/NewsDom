@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/op_search"
+        android:title="SEARCH"
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_search"
+        app:actionViewClass="android.widget.SearchView" />
+
+    <item
+        android:id="@+id/op_profile"
+        android:title="LOGIN"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/op_setting"
+        android:title="SETTINGS"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/op_notification"
+        android:title="NOTIFY"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/op_manage"
+        android:title="MANAGE"
+        app:showAsAction="never"/>
+
+
+</menu>

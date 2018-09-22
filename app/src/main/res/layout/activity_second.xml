@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SecondActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Detail"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+
+        android:layout_marginTop="10dp"
+        android:textSize="14dp" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/link"
+        android:textSize="12dp"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_marginLeft="20dp"
+        />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/pub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pubDate"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="10dp"
+            android:layout_marginLeft="20dp"
+            />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id= "@+id/btnView"
+        android:text="View"/>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webview"/>
+
+
+
+
+</LinearLayout>
