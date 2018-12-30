@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dfdddd"
     android:id="@+id/mainContainer"
-    tools:context=".PhotoFragment">
+    tools:context=".RecentStoriesFragment">
     <include layout="@layout/fragtoolbar"/>
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -19,5 +18,4 @@
         android:id="@+id/rev">
 
     </android.support.v7.widget.RecyclerView>
-
 </FrameLayout>

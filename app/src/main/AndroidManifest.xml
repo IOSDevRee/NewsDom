@@ -11,19 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashAni">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SecondActivity" />
         <activity android:name=".SearchNews" />
-        <activity android:name=".ProfileLogin" />
         <activity android:name=".SettingNews" />
-        <activity android:name=".NotifyNews" />
-        <activity android:name=".ManageNews"></activity>
     </application>
 
 </manifest>

@@ -3,9 +3,24 @@ package geoacircle.info.newsdom;
 public class GetterSetter {
 
     String title;
-    String description;
     String link;
+    String newsImageUrl;
+    String description;
     String published;
+
+    public GetterSetter(String title, String newsImageUrl, String description, String link, String published) {
+        this.title = title;
+        this.link = link;
+        this.newsImageUrl = newsImageUrl;
+        this.description = description;
+        this.published = published;
+    }
+
+    public GetterSetter(String title, String newsImageUrl) {
+        this.title = title;
+        this.newsImageUrl = newsImageUrl;
+    }
+
 
     public GetterSetter(String title, String description, String link, String published) {
         this.title = title;
@@ -20,6 +35,14 @@ public class GetterSetter {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getNewsImageUrl() {
+        return newsImageUrl;
+    }
+
+    public void setNewsImageUrl(String newsImageUrl) {
+        this.newsImageUrl = newsImageUrl;
     }
 
     public String getDescription() {

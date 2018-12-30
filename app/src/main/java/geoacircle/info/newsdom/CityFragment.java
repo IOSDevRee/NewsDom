@@ -3,11 +3,9 @@ package geoacircle.info.newsdom;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.load.resource.file.FileResource;
 
@@ -30,32 +27,39 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-public class PhotoFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class CityFragment extends Fragment {
+
 
     RecyclerView rev;
     FrameLayout fr;
-    Button btn;
-    String url = "https://timesofindia.indiatimes.com/rssfeedstopstories.cms";
-
-    ArrayList<GetterSetter> al = new ArrayList<>();
+    String url = "https://timesofindia.indiatimes.com/rssfeeds/-2128821153.cms";
     String imgURL;
-    public PhotoFragment() {
+    Button btn;
+    ArrayList<GetterSetter> al = new ArrayList<>();
+
+    public CityFragment() {
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_photo, container, false);
+        View v =  inflater.inflate(R.layout.fragment_city, container, false);
         rev = v.findViewById(R.id.rev);
+
         Toolbar toolbar = v.findViewById(R.id.tf);
-        toolbar.setTitle("TOP STORIES");
+        toolbar.setTitle("CITY NEWS");
 
         btn = v.findViewById(R.id.nextfragment);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +74,7 @@ public class PhotoFragment extends Fragment {
         fr = v.findViewById(R.id.mainContainer);
 
 
-        Snackbar snackbar = Snackbar.make(fr,"Signed to Top Stories ", Snackbar.LENGTH_INDEFINITE).setAction("View", new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(fr,"Signed to Ahmedabad City News", Snackbar.LENGTH_INDEFINITE).setAction("View", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar snackbar1 = Snackbar.make(fr, "Use settings to manage", Snackbar.LENGTH_LONG);
@@ -130,26 +134,40 @@ public class PhotoFragment extends Fragment {
                 Element element = (Element) node;
 
                 String title = getElementbyname(element, "title");
-                String description = getElementbyname(element, "description");
                 String link = getElementbyname(element, "link");
                 String published = getElementbyname(element, "pubDate");
-              //  String img = getElementbyname(element, "img");
+                String description = getElementbyname(element, "description");
+                String detail = description.substring(description.indexOf("/a>")+3);
+
 
                 Log.d("mydata", "Title: "+ title);
-                Log.d("mydata", "Description: "+ description);
                 Log.d("mydata", "Link: "+ link);
                 Log.d("mydata", "published: "+ published);
-              //  Log.d("mydata", "image: "+ img);
+                Log.d("mydata", "detail: "+ detail);
+
+                StringTokenizer st = new StringTokenizer(description," ");
+                String currentToken="";
+
+
+
+                while (st.hasMoreTokens()) {
+                    currentToken = st.nextToken();
+
+                    if(currentToken.startsWith("src")){
+
+                        imgURL = currentToken.substring(currentToken.indexOf("src")+ 5, currentToken.indexOf(".cms")+ 4);
+                        Log.d("mydata", "Image: "+imgURL);
+                    }
+
+                }
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 rev.setLayoutManager(layoutManager);
-
-                GetterSetter g1 = new GetterSetter(title, description, link, published);
+                GetterSetter g1 = new GetterSetter(title, imgURL, detail, link, published);
                 al.add(g1);
-
                 MyAdapter my = new MyAdapter(getContext(), al);
-
                 rev.setAdapter(my);
+
 
             }
 

@@ -3,11 +3,9 @@ package geoacircle.info.newsdom;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.load.resource.file.FileResource;
 
@@ -30,32 +27,37 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-public class PhotoFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class IndiaFragment extends Fragment {
+
 
     RecyclerView rev;
     FrameLayout fr;
     Button btn;
-    String url = "https://timesofindia.indiatimes.com/rssfeedstopstories.cms";
+    String url = "https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms";
 
     ArrayList<GetterSetter> al = new ArrayList<>();
     String imgURL;
-    public PhotoFragment() {
+    public IndiaFragment() {
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_photo, container, false);
+        View v =  inflater.inflate(R.layout.fragment_india, container, false);
         rev = v.findViewById(R.id.rev);
         Toolbar toolbar = v.findViewById(R.id.tf);
-        toolbar.setTitle("TOP STORIES");
+        toolbar.setTitle("INDIA NEWS");
 
         btn = v.findViewById(R.id.nextfragment);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +72,7 @@ public class PhotoFragment extends Fragment {
         fr = v.findViewById(R.id.mainContainer);
 
 
-        Snackbar snackbar = Snackbar.make(fr,"Signed to Top Stories ", Snackbar.LENGTH_INDEFINITE).setAction("View", new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(fr,"Signed to India News ", Snackbar.LENGTH_INDEFINITE).setAction("View", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar snackbar1 = Snackbar.make(fr, "Use settings to manage", Snackbar.LENGTH_LONG);
@@ -126,30 +128,50 @@ public class PhotoFragment extends Fragment {
 
             for(int i=0; i<nodeList.getLength(); i++) {
 
+                String detail = "";
                 Node node = nodeList.item(i);
                 Element element = (Element) node;
 
                 String title = getElementbyname(element, "title");
-                String description = getElementbyname(element, "description");
                 String link = getElementbyname(element, "link");
                 String published = getElementbyname(element, "pubDate");
-              //  String img = getElementbyname(element, "img");
+                String description = getElementbyname(element, "description");
 
-                Log.d("mydata", "Title: "+ title);
-                Log.d("mydata", "Description: "+ description);
-                Log.d("mydata", "Link: "+ link);
-                Log.d("mydata", "published: "+ published);
-              //  Log.d("mydata", "image: "+ img);
+                try {
+                    detail = description.substring(description.indexOf("/a>") + 3);
+                }catch(StringIndexOutOfBoundsException e) {
+                    continue;
+                }
+
+                Log.d("my", "Title: "+ title);
+                Log.d("my", "Link: "+ link);
+                Log.d("my", "published: "+ published);
+                Log.d("my", "detail: "+ detail);
+
+                StringTokenizer st = new StringTokenizer(description," ");
+                String currentToken="";
+
+
+
+                while (st.hasMoreTokens()) {
+                    currentToken = st.nextToken();
+
+                    if(currentToken.startsWith("src")){
+
+                        imgURL = currentToken.substring(currentToken.indexOf("src")+ 5, currentToken.indexOf(".cms")+ 4);
+                        Log.d("my", "Image: "+imgURL);
+                    }
+
+                }
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 rev.setLayoutManager(layoutManager);
-
-                GetterSetter g1 = new GetterSetter(title, description, link, published);
+                GetterSetter g1 = new GetterSetter(title, imgURL, detail, link, published);
                 al.add(g1);
-
                 MyAdapter my = new MyAdapter(getContext(), al);
-
                 rev.setAdapter(my);
+
+
 
             }
 

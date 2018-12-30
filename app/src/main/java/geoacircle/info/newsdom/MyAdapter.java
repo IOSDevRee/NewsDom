@@ -2,26 +2,53 @@ package geoacircle.info.newsdom;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass>{
 
     Context context;
+    WorldFragment worldFragment;
+    LayoutInflater inflater;
+
     ArrayList<GetterSetter> arrayList;
+    ImageView imgView;
+    private List<GetterSetter> searchList = null;
+
+    public MyAdapter(Context context, List<GetterSetter> searchList) {
+        this.context = context;
+        this.searchList = searchList;
+        inflater = LayoutInflater.from(context);
+        this.arrayList = new ArrayList<GetterSetter>();
+        this.arrayList.addAll(searchList);
+    }
 
     public MyAdapter(Context context, ArrayList<GetterSetter> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
+
+
+
+    public MyAdapter(WorldFragment worldFragment, ArrayList<GetterSetter> filteredModelList) {
+        this.context = context;
+        this.arrayList = arrayList;
+    }
+
 
     @Override
     public Myclass onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,6 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
         return myclass;
     }
 
+
     @Override
     public void onBindViewHolder(final Myclass holder, int position) {
 
@@ -38,7 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
 
         holder.title.setText(g1.getTitle());
         holder.description.setText(g1.getDescription());
-
+        Glide.with(context).load(g1.getNewsImageUrl()).into(holder.imgView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +79,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
         });
 
     }
-
 
 
     @Override
@@ -69,6 +96,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
 
         ArrayList<GetterSetter> arrayList;
         Context context;
+        ImageView imgView;
 
 
         public Myclass(View itemView, Context context, ArrayList<GetterSetter> arrayList) {
@@ -81,6 +109,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
             description = itemView.findViewById(R.id.desc);
             link = itemView.findViewById(R.id.link);
             published = itemView.findViewById(R.id.pubDate);
+            imgView = itemView.findViewById(R.id.imgID);
+
 
 
         }
@@ -95,8 +125,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myclass> {
             intent.putExtra("description", arrayList.getDescription());
             intent.putExtra("link", arrayList.getLink());
             intent.putExtra("pubDate", arrayList.getPublished());
+            intent.putExtra("url", arrayList.getNewsImageUrl());
             this.context.startActivity(intent);
 
         }
     }
+
+
 }

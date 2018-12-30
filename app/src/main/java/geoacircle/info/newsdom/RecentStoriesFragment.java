@@ -3,11 +3,9 @@ package geoacircle.info.newsdom;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.load.resource.file.FileResource;
 
@@ -36,26 +33,31 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-public class PhotoFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+
+public class RecentStoriesFragment extends Fragment {
 
     RecyclerView rev;
     FrameLayout fr;
     Button btn;
-    String url = "https://timesofindia.indiatimes.com/rssfeedstopstories.cms";
-
-    ArrayList<GetterSetter> al = new ArrayList<>();
+    String url = "https://timesofindia.indiatimes.com/rssfeeds/1221656.cms";
     String imgURL;
-    public PhotoFragment() {
+    ArrayList<GetterSetter> al = new ArrayList<>();
+
+    public RecentStoriesFragment() {
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_photo, container, false);
+        View v =  inflater.inflate(R.layout.fragment_recent_stories, container, false);
         rev = v.findViewById(R.id.rev);
         Toolbar toolbar = v.findViewById(R.id.tf);
-        toolbar.setTitle("TOP STORIES");
+        toolbar.setTitle("RECENT STORIES");
 
         btn = v.findViewById(R.id.nextfragment);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +72,7 @@ public class PhotoFragment extends Fragment {
         fr = v.findViewById(R.id.mainContainer);
 
 
-        Snackbar snackbar = Snackbar.make(fr,"Signed to Top Stories ", Snackbar.LENGTH_INDEFINITE).setAction("View", new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(fr,"Signed to Recent Stories ", Snackbar.LENGTH_INDEFINITE).setAction("View", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar snackbar1 = Snackbar.make(fr, "Use settings to manage", Snackbar.LENGTH_LONG);
@@ -133,13 +135,13 @@ public class PhotoFragment extends Fragment {
                 String description = getElementbyname(element, "description");
                 String link = getElementbyname(element, "link");
                 String published = getElementbyname(element, "pubDate");
-              //  String img = getElementbyname(element, "img");
+                //  String img = getElementbyname(element, "img");
 
                 Log.d("mydata", "Title: "+ title);
                 Log.d("mydata", "Description: "+ description);
                 Log.d("mydata", "Link: "+ link);
                 Log.d("mydata", "published: "+ published);
-              //  Log.d("mydata", "image: "+ img);
+                //  Log.d("mydata", "image: "+ img);
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 rev.setLayoutManager(layoutManager);

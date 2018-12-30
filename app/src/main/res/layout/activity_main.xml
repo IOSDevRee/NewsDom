@@ -16,22 +16,22 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/mainContainer"
     android:orientation="vertical">
 
     <include layout="@layout/mytoolbar"/>
 
-
-
-    <FrameLayout
+      <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container"
-
         >
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rev">
+
 
         </android.support.v7.widget.RecyclerView>
 

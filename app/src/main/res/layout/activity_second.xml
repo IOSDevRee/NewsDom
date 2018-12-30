@@ -6,36 +6,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SecondActivity">
-
-    <TextView
+<!--
+       <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+           android:layout_marginTop="10dp"
         android:textColor="#000"
-        android:textSize="15dp" />
+        android:textSize="15dp" />-->
 
-    <TextView
+   <!-- <ImageView
+        android:id="@+id/imgID"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+
+        android:src="@mipmap/ic_launcher" />-->
+
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:text="Detail"
         android:textColor="@color/colorPrimary"
-        android:textSize="14dp" />
+        android:textSize="14dp" />-->
 
-    <TextView
+<!--        <TextView
         android:id="@+id/desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
 
-        android:layout_marginTop="10dp"
-        android:textSize="14dp" />
+            android:layout_marginTop="10dp"
+        android:textSize="14dp" />-->
 
-    <TextView
-        android:layout_marginTop="10dp"
+        <TextView
+            android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/link"
@@ -54,18 +63,17 @@
             android:textSize="10dp"
             android:layout_marginLeft="20dp"
             />
-
+<!--
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id= "@+id/btnView"
-        android:text="View"/>
+        android:text="View"/>-->
 
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/webview"/>
-
 
 
 
